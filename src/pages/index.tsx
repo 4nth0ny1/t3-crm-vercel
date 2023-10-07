@@ -6,6 +6,7 @@ import { api } from "~/utils/api";
 
 export default function Home() {
   const hello = api.example.hello.useQuery({ text: "from tRPC" });
+  const { data: sessionData } = useSession();
 
   return (
     <>
@@ -19,7 +20,11 @@ export default function Home() {
           <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
             <span className="text-[hsl(280,100%,70%)]">T3</span> CRM
           </h1>
-
+          {!sessionData && (
+            <button onClick={() => signIn("google")}>Google</button>
+          )}
+          {sessionData && <button onClick={() => signOut()}>SignOut</button>}
+          <button onClick={() => signIn("github")}>Github</button>
           <div className="flex flex-col items-center gap-2">
             <p className="text-2xl ">
               {hello.data ? hello.data.greeting : "Loading tRPC query..."}
