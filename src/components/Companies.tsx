@@ -20,7 +20,7 @@ export default function Companies() {
         {companies?.map((company) => {
           return (
             <tbody>
-              <tr>
+              <tr key={company.name}>
                 <th>{company.id}</th>
                 <td>{company.name}</td>
                 <td>{company.phone}</td>
