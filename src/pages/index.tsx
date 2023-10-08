@@ -42,6 +42,7 @@ export default function Home() {
       {sessionData && (
         <main className="px-8">
           <Navbar />
+          <h2>Dashboard</h2>
         </main>
       )}
     </>

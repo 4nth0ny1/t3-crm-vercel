@@ -10,7 +10,7 @@ export default function Navbar() {
       </div>
       <div className="flex-none gap-10">
         <ul className="flex flex-row gap-10">
-          <Link href="/dashboard">
+          <Link href="/">
             <li>Dashboard</li>
           </Link>
           <Link href="/accounts">
