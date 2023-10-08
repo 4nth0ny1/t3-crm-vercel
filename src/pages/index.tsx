@@ -1,4 +1,4 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import Head from "next/head";
 import { FcGoogle } from "react-icons/fc";
 import { FiGithub } from "react-icons/fi";
