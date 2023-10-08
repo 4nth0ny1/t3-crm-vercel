@@ -3,8 +3,14 @@ import { SessionProvider } from "next-auth/react";
 import { type AppType } from "next/app";
 
 import { api } from "~/utils/api";
-
+import { Poppins } from "next/font/google";
 import "~/styles/globals.css";
+
+const poppins = Poppins({
+  weight: ["400", "500", "700", "900"],
+  style: ["normal", "italic"],
+  subsets: ["latin"],
+});
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -12,7 +18,9 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <main className={poppins.className}>
+        <Component {...pageProps} />
+      </main>
     </SessionProvider>
   );
 };
