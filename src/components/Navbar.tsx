@@ -13,15 +13,15 @@ export default function Navbar() {
           <Link href="/">
             <li>Dashboard</li>
           </Link>
-          <Link href="/accounts">
-            <li>Accounts</li>
+          <Link href="/companies">
+            <li>Companies</li>
           </Link>
           <Link href="/reports">
             <li>Reports</li>
           </Link>
         </ul>
         <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+          <label tabIndex={0} className="avatar btn btn-circle btn-ghost">
             <div className="w-10 rounded-full">
               <img
                 src={sessionData?.user.image as string}
@@ -33,7 +33,7 @@ export default function Navbar() {
           </label>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+            className="menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow"
           >
             <li>
               <a className="justify-between">
