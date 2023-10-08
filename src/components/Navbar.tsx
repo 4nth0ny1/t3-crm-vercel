@@ -1,4 +1,5 @@
 import { signOut, useSession } from "next-auth/react";
+import Link from "next/link";
 
 export default function Navbar() {
   const { data: sessionData } = useSession();
@@ -9,9 +10,15 @@ export default function Navbar() {
       </div>
       <div className="flex-none gap-10">
         <ul className="flex flex-row gap-10">
-          <li>Dashboard</li>
-          <li>Accounts</li>
-          <li>Reports</li>
+          <Link href="/dashboard">
+            <li>Dashboard</li>
+          </Link>
+          <Link href="/accounts">
+            <li>Accounts</li>
+          </Link>
+          <Link href="/reports">
+            <li>Reports</li>
+          </Link>
         </ul>
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
