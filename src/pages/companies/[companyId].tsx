@@ -9,6 +9,8 @@ export default function CompanyPage() {
 
   const { data: company } = api.company.getOneCompany.useQuery({ companyId });
 
+  const { data: notes } = api.companyNote.getAllNotes.useQuery({ companyId });
+  console.log(notes);
   return (
     <div>
       <Navbar />
@@ -23,6 +25,13 @@ export default function CompanyPage() {
           </div>
           <div className="bg-gray-200 p-4">
             <h2>Notes</h2>
+            {notes?.map((note) => {
+              return (
+                <ul>
+                  <li>{note?.content}</li>
+                </ul>
+              );
+            })}
           </div>
         </div>
         <div className="flex w-1/3 flex-col">
