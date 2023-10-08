@@ -19,6 +19,7 @@ const config = {
     "@next/next/no-img-element": "off",
     "@typescript-eslint/non-nullable-type-assertion-style": "off",
     "react/no-unescaped-entities": "off",
+    "react/jsx-key": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
       {
