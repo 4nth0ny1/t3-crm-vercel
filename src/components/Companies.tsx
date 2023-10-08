@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { api } from "../utils/api";
 
 export default function Companies() {
@@ -20,14 +21,16 @@ export default function Companies() {
         {companies?.map((company) => {
           return (
             <tbody>
-              <tr key={company.name}>
-                <th>{company.id}</th>
-                <td>{company.name}</td>
-                <td>{company.phone}</td>
-                <td>{company.city}</td>
-                <td>{company.state}</td>
-                {/* <td>{company.updatedAt}</td> */}
-              </tr>
+              <Link href={`/companies/${company.id}`}>
+                <tr key={company.name}>
+                  <th>{company.id}</th>
+                  <td>{company.name}</td>
+                  <td>{company.phone}</td>
+                  <td>{company.city}</td>
+                  <td>{company.state}</td>
+                  {/* <td>{company.updatedAt}</td> */}
+                </tr>
+              </Link>
             </tbody>
           );
         })}

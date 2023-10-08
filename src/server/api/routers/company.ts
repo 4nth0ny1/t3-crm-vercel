@@ -1,4 +1,4 @@
-// import { z } from "zod";
+import { z } from "zod";
 
 import {
   createTRPCRouter,
@@ -13,8 +13,20 @@ export const companyRouter = createTRPCRouter({
         userId: ctx.session.user.id,
       },
     });
-  
   }),
+
+  getOneCompany: protectedProcedure
+  .input(z.object({companyId: z.string()}))
+  .query(async ({ctx, input}) => {
+    return await ctx.db.company.findUnique({
+      where: {
+        id: input.companyId
+      }, 
+      
+    })
+  }), 
+
+
 
 
 });
