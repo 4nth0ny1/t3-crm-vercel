@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Head from "next/head";
 import { FcGoogle } from "react-icons/fc";
 import { FiGithub } from "react-icons/fi";
+import Navbar from "~/components/Navbar";
 import { api } from "~/utils/api";
 
 export default function Home() {
@@ -41,9 +42,8 @@ export default function Home() {
         </main>
       )}
       {sessionData && (
-        <main>
-          <h1>hello there</h1>{" "}
-          <button onClick={() => signOut()}>SignOut</button>
+        <main className="px-8">
+          <Navbar />
         </main>
       )}
     </>
