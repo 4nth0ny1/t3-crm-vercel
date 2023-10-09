@@ -21,7 +21,9 @@ export default function Companies() {
           {companies?.map((company) => {
             return (
               <tr key={company.name}>
-                <td>{company.name}</td>
+                <Link href={`/companies/${company.id}`} className="underline">
+                  <td>{company.name}</td>
+                </Link>
                 <td>{company.phone}</td>
                 <td>{company.city}</td>
                 <td>{company.state}</td>
