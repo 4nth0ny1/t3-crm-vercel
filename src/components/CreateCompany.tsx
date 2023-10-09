@@ -1,7 +1,15 @@
 import { api } from "../utils/api";
 import { useState } from "react";
 
-export default function CreateCompany() {
+type CreateCompanyProps = {
+  openForm: boolean;
+  setOpenForm: (arg0: boolean) => void;
+};
+
+export default function CreateCompany({
+  openForm,
+  setOpenForm,
+}: CreateCompanyProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [city, setCity] = useState("");
@@ -16,12 +24,13 @@ export default function CreateCompany() {
       setPhone("");
       setCity("");
       setState("");
+      setOpenForm(!openForm);
     },
   });
 
   return (
     <form
-      className="flex flex-col items-center py-20"
+      className="flex flex-col items-center gap-4 py-20"
       onSubmit={(e) => {
         e.preventDefault();
         mutate({ name, phone, city, state });
@@ -57,7 +66,16 @@ export default function CreateCompany() {
         value={state}
         onChange={(e) => setState(e.target.value)}
       />
-      <button className="btn btn-primary">Create</button>
+      <div className="flex flex-row gap-4">
+        <button
+          onClick={() => setOpenForm(!openForm)}
+          className="btn btn-accent"
+        >
+          Cancel
+        </button>
+
+        <button className="btn btn-primary">Create</button>
+      </div>
     </form>
   );
 }
