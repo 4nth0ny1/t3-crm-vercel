@@ -1,7 +1,6 @@
 import Navbar from "~/components/Navbar";
 import Companies from "../../components/Companies";
 import CreateCompany from "~/components/CreateCompany";
-import { AiOutlinePlusSquare } from "react-icons/ai";
 import { useState } from "react";
 
 export default function CompaniesPage() {
@@ -9,12 +8,16 @@ export default function CompaniesPage() {
   return (
     <>
       <Navbar />
-      {!openForm && (
-        <AiOutlinePlusSquare
-          className="text-4xl"
-          onClick={() => setOpenForm(!openForm)}
-        />
-      )}
+      <div className="flex flex-row justify-end px-20">
+        {!openForm && (
+          <div
+            className="mb-4 flex flex-row items-center gap-4 rounded-xl border-2 border-primary bg-primary p-2 text-white"
+            onClick={() => setOpenForm(!openForm)}
+          >
+            <h2>Create Company</h2>
+          </div>
+        )}
+      </div>
       {openForm && (
         <CreateCompany openForm={openForm} setOpenForm={setOpenForm} />
       )}
