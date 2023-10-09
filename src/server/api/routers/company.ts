@@ -12,7 +12,9 @@ export const companyRouter = createTRPCRouter({
       where: {
         userId: ctx.session.user.id,
       },
+      orderBy: [{ name: "asc" }],
     });
+    
   }),
 
   getOneCompany: protectedProcedure
@@ -23,6 +25,24 @@ export const companyRouter = createTRPCRouter({
         id: input.companyId
       }, 
       
+    })
+  }), 
+
+  createCompany: protectedProcedure
+  .input(z.object({name: z.string(), state: z.string(), city: z.string(), phone: z.string()}))
+  .mutation(async ({ctx, input}) => {
+    return await ctx.db.company.create({
+      data: {
+        name: input.name,
+        state: input.state,
+        city: input.city,
+        phone: input.phone,
+        user: {
+          connect: {
+            id: ctx.session.user.id
+          }
+        }
+      }
     })
   }), 
 
