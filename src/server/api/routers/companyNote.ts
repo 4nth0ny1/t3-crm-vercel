@@ -37,4 +37,14 @@ export const companyNoteRouter = createTRPCRouter({
       }
     })
   }), 
+
+  deleteNote: protectedProcedure
+  .input(z.string())
+  .mutation(({ctx, input}) => {
+    return ctx.db.companyNote.delete({
+      where: {
+        id: input
+      }
+    })
+  }), 
 });

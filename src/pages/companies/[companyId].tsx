@@ -4,6 +4,7 @@ import Navbar from "~/components/Navbar";
 import { api } from "~/utils/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { AiFillDelete } from "react-icons/ai";
 
 dayjs.extend(relativeTime);
 
@@ -21,6 +22,11 @@ export default function CompanyPage() {
     onSettled: async () => {
       await ctx.companyNote.getAllNotes.invalidate();
       setOpenNoteModal(!openNoteModal);
+    },
+  });
+  const { mutate: deleteMutation } = api.companyNote.deleteNote.useMutation({
+    onSettled: async () => {
+      await ctx.companyNote.getAllNotes.invalidate();
     },
   });
 
@@ -49,9 +55,17 @@ export default function CompanyPage() {
               </div>
               {notes?.map((note) => {
                 return (
-                  <div className="mb-4 flex flex-row justify-between border-b border-gray-500">
+                  <div className="mb-8 flex flex-row justify-between border-b border-gray-500 pb-4">
                     <p>{note?.content}</p>
-                    <p>{`${dayjs(note?.createdAt).fromNow()}`}</p>
+                    <div className="flex flex-col">
+                      <p>{`${dayjs(note?.createdAt).fromNow()}`}</p>
+                      <div className="flex flex-row justify-end">
+                        <AiFillDelete
+                          onClick={() => deleteMutation(note?.id)}
+                          className=" text-right text-2xl text-red-600 hover:cursor-pointer"
+                        />
+                      </div>
+                    </div>
                   </div>
                 );
               })}
