@@ -2,6 +2,10 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Navbar from "~/components/Navbar";
 import { api } from "~/utils/api";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 export default function CompanyPage() {
   const [openNoteModal, setOpenNoteModal] = useState(false);
@@ -34,17 +38,21 @@ export default function CompanyPage() {
               </p>
             </div>
             <div className="bg-gray-200 p-4">
-              <div className="flex flex-row justify-between">
-                <h2>Notes</h2>
-                <button onClick={() => setOpenNoteModal(!openNoteModal)}>
+              <div className="mb-4 flex flex-row justify-between">
+                <h2 className="text-xl">Notes</h2>
+                <button
+                  className="btn btn-primary"
+                  onClick={() => setOpenNoteModal(!openNoteModal)}
+                >
                   add note
                 </button>
               </div>
               {notes?.map((note) => {
                 return (
-                  <ul>
-                    <li>{note?.content}</li>
-                  </ul>
+                  <div className="mb-4 flex flex-row justify-between border-b border-gray-500">
+                    <p>{note?.content}</p>
+                    <p>{`${dayjs(note?.createdAt).fromNow()}`}</p>
+                  </div>
                 );
               })}
             </div>
