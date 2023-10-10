@@ -17,4 +17,24 @@ export const companyNoteRouter = createTRPCRouter({
       },
     orderBy: [{ createdAt: "desc" }],})
   }),
+
+  createNote: protectedProcedure
+  .input(z.object({content: z.string(), companyId: z.string()}))
+  .mutation(({ctx, input}) => {
+    return ctx.db.companyNote.create({
+      data: {
+        content: input.content,
+        user: {
+          connect: {
+            id: ctx.session.user.id
+          }
+        },
+        company: {
+          connect: {
+            id: input.companyId
+          }
+        }
+      }
+    })
+  }), 
 });

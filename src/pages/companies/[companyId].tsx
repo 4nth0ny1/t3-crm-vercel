@@ -7,13 +7,19 @@ export default function CompanyPage() {
   const [openNoteModal, setOpenNoteModal] = useState(false);
   const [content, setContent] = useState("");
   const router = useRouter();
+  const ctx = api.useContext();
 
   const companyId = router.query.companyId as string;
 
   const { data: company } = api.company.getOneCompany.useQuery({ companyId });
-
   const { data: notes } = api.companyNote.getAllNotes.useQuery({ companyId });
-  console.log(notes);
+  const { mutate: createNote } = api.companyNote.createNote.useMutation({
+    onSettled: async () => {
+      await ctx.companyNote.getAllNotes.invalidate();
+      setOpenNoteModal(!openNoteModal);
+    },
+  });
+
   return (
     <div>
       <Navbar />
@@ -56,7 +62,13 @@ export default function CompanyPage() {
         <div className="flex h-[calc(100vh-84px)]  flex-row items-center justify-center">
           <div className="flex h-[500px] w-[500px] flex-col items-center justify-center rounded-xl border-2 border-blue-300 px-8 py-8">
             <h2 className="pb-4 text-2xl">Create a Note</h2>
-            <form className="w-full">
+            <form
+              className="w-full"
+              onSubmit={(e) => {
+                e.preventDefault();
+                createNote({ content, companyId });
+              }}
+            >
               <textarea
                 className="textarea textarea-bordered h-[300px] w-full"
                 placeholder="Add a note"
