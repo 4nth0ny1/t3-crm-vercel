@@ -5,11 +5,14 @@ import { api } from "~/utils/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { AiFillDelete } from "react-icons/ai";
+import ContactList from "~/components/ContactList";
+import CreateContactForm from "~/components/CreateContactForm";
 
 dayjs.extend(relativeTime);
 
 export default function CompanyPage() {
   const [openNoteModal, setOpenNoteModal] = useState(false);
+  const [showAddContactForm, setShowAddContactForm] = useState(false);
   const [content, setContent] = useState("");
   const router = useRouter();
   const ctx = api.useContext();
@@ -72,8 +75,30 @@ export default function CompanyPage() {
             </div>
           </div>
           <div className="flex w-1/3 flex-col">
-            <div className="mb-4 bg-gray-200 p-4">
-              <h2>Contacts</h2>
+            <div className="mb-4 flex flex-col gap-4 bg-gray-200 p-4">
+              <div className="flex flex-row justify-between">
+                <h2>Contacts</h2>
+                {!showAddContactForm ? (
+                  <button
+                    className="btn btn-primary"
+                    onClick={() => setShowAddContactForm(!showAddContactForm)}
+                  >
+                    add contact
+                  </button>
+                ) : (
+                  <button
+                    className="btn btn-secondary"
+                    onClick={() => setShowAddContactForm(!showAddContactForm)}
+                  >
+                    cancel
+                  </button>
+                )}
+              </div>
+              {showAddContactForm && (
+                <CreateContactForm companyId={companyId} />
+              )}
+
+              <ContactList />
             </div>
             <div className="bg-gray-200 p-4">
               <h2>Opportunities</h2>

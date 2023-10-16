@@ -14,3 +14,10 @@ export type CompanyNote = allCompanyNotesOutput[number]
 export const getAllNotes = z.object({
     companyId: z.string().cuid()
   })
+
+  type allContactsOutput = RouterOutputs['contact']['getAllContacts']
+  export type Contact = allContactsOutput[number]
+  
+  export const getAllContacts = z.object({
+      companyId: z.string().cuid()
+    })
