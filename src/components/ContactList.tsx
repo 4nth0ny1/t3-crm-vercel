@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
 import { api } from "~/utils/api";
@@ -16,10 +17,12 @@ export default function ContactList() {
         return (
           <ContactItem
             key={contact.id}
+            id={contact.id}
             name={contact.name}
             title={contact.title}
             phone={contact.phone}
             email={contact.email}
+            companyId={contact.companyId}
           />
         );
       })}
@@ -28,15 +31,30 @@ export default function ContactList() {
 }
 
 type ContactProps = {
+  id: string;
   name: string;
   title: string;
   phone: string;
   email: string;
+  companyId: string;
 };
-const ContactItem = ({ name, title, phone, email }: ContactProps) => {
+const ContactItem = ({
+  id,
+  name,
+  title,
+  phone,
+  email,
+  companyId,
+}: ContactProps) => {
+  console.log(companyId);
   return (
-    <div>
-      <h2>{name}</h2>
+    <div className="flex flex-row justify-between">
+      {/* <Link href={`${companyId}/contacts/${id}`}> */}
+      <Link href={`/companies/contacts/${id}`}>
+        <h2>{name}</h2>
+      </Link>
+      <p>{title}</p>
+      <p>{phone}</p>
     </div>
   );
 };

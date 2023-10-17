@@ -18,6 +18,17 @@ export const contactRouter = createTRPCRouter({
     orderBy: [{ createdAt: "desc" }],})
   }),
 
+  getOneContact: protectedProcedure
+  .input(z.object({contactId: z.string()}))
+  .query(async ({ctx, input}) => {
+    return await ctx.db.contact.findUnique({
+      where: {
+        id: input.contactId
+      }, 
+      
+    })
+  }), 
+
   createContact: protectedProcedure
   .input(z.object({name: z.string(), title: z.string(), phone: z.string(), email: z.string(), companyId: z.string()}))
   .mutation(({ctx, input}) => {
