@@ -6,7 +6,7 @@ export default function Navbar() {
   return (
     <div className="navbar">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl normal-case">daisyUI</a>
+        <a className="btn btn-ghost text-xl normal-case">t3-crm</a>
       </div>
       <div className="flex-none gap-10">
         <ul className="flex flex-row gap-10">
@@ -20,7 +20,7 @@ export default function Navbar() {
             <li>Reports</li>
           </Link>
         </ul>
-        <div className="dropdown dropdown-end">
+        <div className="dropdown-end dropdown">
           <label tabIndex={0} className="avatar btn btn-circle btn-ghost">
             <div className="w-10 rounded-full">
               <img
@@ -33,7 +33,7 @@ export default function Navbar() {
           </label>
           <ul
             tabIndex={0}
-            className="menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 bg-base-100 p-2 shadow"
+            className="menu dropdown-content rounded-box menu-sm z-[1] mt-3 w-52 border border-base-200 bg-base-100 p-2 shadow"
           >
             <li>
               <a className="justify-between">
@@ -45,7 +45,7 @@ export default function Navbar() {
               <a>Settings</a>
             </li>
             <li>
-              <button className="bg-gray-300 p-4" onClick={() => signOut()}>
+              <button className="bg-base-100 p-4" onClick={() => signOut()}>
                 SignOut
               </button>
             </li>

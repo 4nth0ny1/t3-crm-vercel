@@ -39,14 +39,14 @@ export default function CompanyPage() {
       {!openNoteModal ? (
         <div className="flex w-full flex-row gap-4 px-12 py-4">
           <div className="flex w-2/3 flex-col">
-            <div className="mb-4 bg-gray-200 p-4">
+            <div className="mb-4 bg-base-200 p-4">
               <h2>{company?.name}</h2>
               <p>{company?.phone}</p>
               <p>
                 {company?.city}, {company?.state}
               </p>
             </div>
-            <div className="bg-gray-200 p-4">
+            <div className="bg-base-200 p-4">
               <div className="mb-4 flex flex-row justify-between">
                 <h2 className="text-xl">Notes</h2>
                 <button
@@ -75,7 +75,7 @@ export default function CompanyPage() {
             </div>
           </div>
           <div className="flex w-1/3 flex-col">
-            <div className="mb-4 flex flex-col gap-4 bg-gray-200 p-4">
+            <div className="mb-4 flex flex-col gap-4 bg-base-200 p-4">
               <div className="flex flex-row justify-between">
                 <h2>Contacts</h2>
                 {!showAddContactForm ? (
@@ -100,7 +100,7 @@ export default function CompanyPage() {
 
               <ContactList />
             </div>
-            <div className="bg-gray-200 p-4">
+            <div className="bg-base-200 p-4">
               <h2>Opportunities</h2>
             </div>
           </div>
