@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "~/components/Navbar";
 import { api } from "~/utils/api";
 import dayjs from "dayjs";
@@ -7,12 +7,14 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { AiFillDelete } from "react-icons/ai";
 import ContactList from "~/components/ContactList";
 import CreateContactForm from "~/components/CreateContactForm";
+import { set } from "zod";
 
 dayjs.extend(relativeTime);
 
 export default function CompanyPage() {
   const [openNoteModal, setOpenNoteModal] = useState(false);
   const [showAddContactForm, setShowAddContactForm] = useState(false);
+  const [formattedPhone, setFormattedPhone] = useState("");
   const [content, setContent] = useState("");
   const router = useRouter();
   const ctx = api.useContext();
@@ -33,16 +35,34 @@ export default function CompanyPage() {
     },
   });
 
+  function formatPhoneNumber(phoneNumberString: string) {
+    console.log("Init", phoneNumberString);
+    let cleaned = ("" + phoneNumberString).replace(/\D/g, "");
+
+    console.log("Cleaned", cleaned);
+    let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+
+    console.log("Match", match);
+    if (match) {
+      setFormattedPhone("(" + match[1] + ") " + match[2] + "-" + match[3]);
+    }
+    return null;
+  }
+
+  formatPhoneNumber(company?.phone as string);
+
   return (
     <div>
       <Navbar />
       {!openNoteModal ? (
         <div className="flex w-full flex-row gap-4 px-12 py-4">
           <div className="flex w-2/3 flex-col">
-            <div className="mb-4 bg-base-200 p-4">
-              <h2>{company?.name}</h2>
-              <p>{company?.phone}</p>
-              <p>
+            <div className="mb-4 flex justify-between bg-base-200 p-4">
+              <div>
+                <h2 className="text-4xl">{company?.name}</h2>
+                <p className="text-xl">+{formattedPhone}</p>
+              </div>
+              <p className="text-xl">
                 {company?.city}, {company?.state}
               </p>
             </div>
