@@ -44,13 +44,13 @@ export const attemptRouter = createTRPCRouter({
     })
   }), 
 
-//   deleteNote: protectedProcedure
-//   .input(z.string())
-//   .mutation(({ctx, input}) => {
-//     return ctx.db.companyNote.delete({
-//       where: {
-//         id: input
-//       }
-//     })
-//   }), 
+  deleteAttempt: protectedProcedure
+  .input(z.string())
+  .mutation(({ctx, input}) => {
+    return ctx.db.attempt.delete({
+      where: {
+        id: input
+      }
+    })
+  }), 
 });

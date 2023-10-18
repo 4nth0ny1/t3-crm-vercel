@@ -5,12 +5,14 @@ import { api } from "~/utils/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import CreateAttemptForm from "~/components/CreateAttemptForm";
+import { AiFillDelete } from "react-icons/ai";
 
 dayjs.extend(relativeTime);
 
 export default function ContactPage() {
   const router = useRouter();
   const [contactId, setContactId] = useState("");
+  const ctx = api.useContext();
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -23,6 +25,12 @@ export default function ContactPage() {
   });
 
   const { data: attempts } = api.attempt.getAllAttempts.useQuery({ contactId });
+
+  const { mutate: deleteMutation } = api.attempt.deleteAttempt.useMutation({
+    onSettled: async () => {
+      await ctx.attempt.getAllAttempts.invalidate();
+    },
+  });
 
   return (
     <>
@@ -67,9 +75,17 @@ export default function ContactPage() {
               {attempts?.map((attempt) => {
                 return (
                   <div className="border-b border-black py-2">
-                    <div className="flex flex-row justify-between">
+                    <div className="flex flex-row justify-between pb-2">
                       <p>{attempt?.type}</p>
-                      <p>{`${dayjs(attempt?.createdAt).fromNow()}`}</p>
+                      <div className="text-right">
+                        <p>{`${dayjs(attempt?.createdAt).fromNow()}`}</p>
+                        <div className="flex w-full flex-row justify-end">
+                          <AiFillDelete
+                            className="cursor-pointer text-red-500"
+                            onClick={() => deleteMutation(`${attempt?.id}`)}
+                          />
+                        </div>
+                      </div>
                     </div>
                     <p>{attempt?.content}</p>
                   </div>
