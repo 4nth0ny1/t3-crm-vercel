@@ -15,9 +15,16 @@ export const getAllNotes = z.object({
     companyId: z.string().cuid()
   })
 
-  type allContactsOutput = RouterOutputs['contact']['getAllContacts']
-  export type Contact = allContactsOutput[number]
-  
-  export const getAllContacts = z.object({
-      companyId: z.string().cuid()
-    })
+type allContactsOutput = RouterOutputs['contact']['getAllContacts']
+export type Contact = allContactsOutput[number]
+
+export const getAllContacts = z.object({
+    companyId: z.string().cuid()
+  })
+
+type allAttemptsOutput = RouterOutputs['attempt']['getAllAttempts']
+export type Attempt = allAttemptsOutput[number]
+
+export const getAllAttempts = z.object({
+    contactId: z.string().cuid()
+  })
