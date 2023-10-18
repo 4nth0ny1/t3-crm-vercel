@@ -2,6 +2,10 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Navbar from "~/components/Navbar";
 import { api } from "~/utils/api";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 export default function ContactPage() {
   const router = useRouter();
@@ -54,10 +58,18 @@ export default function ContactPage() {
         </div>
         <div className="flex w-1/3 flex-col">
           <div className="mb-4 flex flex-col gap-4 bg-base-200 p-4">
-            <div className="flex flex-row justify-between">
+            <div className="flex flex-col justify-between">
               <h2>Log an Attempt</h2>
               {attempts?.map((attempt) => {
-                return <div>{attempt.content}</div>;
+                return (
+                  <div>
+                    <div className="flex flex-row justify-between">
+                      <p>{attempt?.type}</p>
+                      <p>{`${dayjs(attempt?.createdAt).fromNow()}`}</p>
+                    </div>
+                    <p>{attempt?.content}</p>
+                  </div>
+                );
               })}
             </div>
           </div>
