@@ -60,7 +60,7 @@ export default function ContactPage() {
         <div className="flex w-1/3 flex-col">
           <div className="mb-4 flex flex-col gap-4 bg-base-200 p-4">
             <div className="flex flex-col justify-between">
-              <h2>Log an Attempt</h2>
+              <h2 className="text-xl">Attempts</h2>
               <br></br>
               <CreateAttemptForm companyId={contact?.companyId as string} />
               <br></br>

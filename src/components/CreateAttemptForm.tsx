@@ -32,13 +32,16 @@ export default function CreateAttemptForm({
         mutate({ type, content, contactId, companyId });
       }}
     >
-      <input
-        type="text"
-        placeholder="Enter Type ..."
-        className="input input-bordered w-full"
-        value={type}
+      <select
+        className="select input-bordered select-ghost w-full max-w-xs"
         onChange={(e) => setType(e.target.value)}
-      />
+      >
+        <option disabled selected>
+          What type of attempt did you make?
+        </option>
+        <option>Call</option>
+        <option>Email</option>
+      </select>
       <input
         type="text"
         placeholder="Enter Content ..."
