@@ -4,6 +4,7 @@ import Navbar from "~/components/Navbar";
 import { api } from "~/utils/api";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import CreateAttemptForm from "~/components/CreateAttemptForm";
 
 dayjs.extend(relativeTime);
 
@@ -60,6 +61,9 @@ export default function ContactPage() {
           <div className="mb-4 flex flex-col gap-4 bg-base-200 p-4">
             <div className="flex flex-col justify-between">
               <h2>Log an Attempt</h2>
+              <br></br>
+              <CreateAttemptForm companyId={contact?.companyId as string} />
+              <br></br>
               {attempts?.map((attempt) => {
                 return (
                   <div>
