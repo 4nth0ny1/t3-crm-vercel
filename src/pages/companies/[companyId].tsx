@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Navbar from "~/components/Navbar";
 import { api } from "~/utils/api";
 import dayjs from "dayjs";
@@ -14,7 +14,6 @@ dayjs.extend(relativeTime);
 export default function CompanyPage() {
   const [openNoteModal, setOpenNoteModal] = useState(false);
   const [showAddContactForm, setShowAddContactForm] = useState(false);
-  const [formattedPhone, setFormattedPhone] = useState("");
   const [content, setContent] = useState("");
   const router = useRouter();
   const ctx = api.useContext();
@@ -35,22 +34,6 @@ export default function CompanyPage() {
     },
   });
 
-  function formatPhoneNumber(phoneNumberString: string) {
-    console.log("Init", phoneNumberString);
-    let cleaned = ("" + phoneNumberString).replace(/\D/g, "");
-
-    console.log("Cleaned", cleaned);
-    let match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
-
-    console.log("Match", match);
-    if (match) {
-      setFormattedPhone("(" + match[1] + ") " + match[2] + "-" + match[3]);
-    }
-    return null;
-  }
-
-  formatPhoneNumber(company?.phone as string);
-
   return (
     <div>
       <Navbar />
@@ -60,7 +43,7 @@ export default function CompanyPage() {
             <div className="mb-4 flex justify-between bg-base-200 p-4">
               <div>
                 <h2 className="text-4xl">{company?.name}</h2>
-                <p className="text-xl">+{formattedPhone}</p>
+                <p className="text-xl">{company?.phone}</p>
               </div>
               <p className="text-xl">
                 {company?.city}, {company?.state}

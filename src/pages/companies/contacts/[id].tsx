@@ -1,13 +1,5 @@
 import { useParams } from "next/navigation";
-import { useRouter } from "next/router";
 import { api } from "~/utils/api";
-
-type ContactProps = {
-  name: string;
-  title: string;
-  phone: string;
-  email: string;
-};
 
 export default function ContactPage() {
   const params = useParams();

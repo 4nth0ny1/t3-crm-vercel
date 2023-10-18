@@ -5,7 +5,6 @@ import { api } from "~/utils/api";
 
 export default function ContactList() {
   const router = useRouter();
-  const ctx = api.useContext();
 
   const companyId = router.query.companyId as string;
 
@@ -54,7 +53,10 @@ const ContactItem = ({
         <h2>{name}</h2>
       </Link>
       <p>{title}</p>
-      <p>{phone}</p>
+      <div className="flex flex-col gap-2">
+        <p>{phone}</p>
+        <p>{email}</p>
+      </div>
     </div>
   );
 };
