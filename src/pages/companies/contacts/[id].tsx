@@ -66,7 +66,7 @@ export default function ContactPage() {
               <br></br>
               {attempts?.map((attempt) => {
                 return (
-                  <div>
+                  <div className="border-b border-black py-2">
                     <div className="flex flex-row justify-between">
                       <p>{attempt?.type}</p>
                       <p>{`${dayjs(attempt?.createdAt).fromNow()}`}</p>
