@@ -41,6 +41,8 @@ export default function ContactPage() {
             <div>
               <h2 className="text-4xl">{contact?.name}</h2>
               <p className="text-xl">{contact?.title}</p>
+              <p className="text-xl">{contact?.phone}</p>
+              <p className="text-xl">{contact?.email}</p>
             </div>
           </div>
           <div className="bg-base-200 p-4">

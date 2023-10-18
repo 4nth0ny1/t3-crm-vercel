@@ -33,7 +33,7 @@ export default function CreateAttemptForm({
       }}
     >
       <select
-        className="select input-bordered select-ghost w-full max-w-xs"
+        className="select input-bordered w-full max-w-xs"
         onChange={(e) => setType(e.target.value)}
       >
         <option disabled selected>
