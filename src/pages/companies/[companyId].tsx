@@ -60,7 +60,7 @@ export default function CompanyPage() {
               </div>
               {notes?.map((note) => {
                 return (
-                  <div className="mb-8 flex flex-row justify-between border-b border-gray-500 pb-4">
+                  <div className="mb-8 flex flex-row justify-between gap-10 border-b border-gray-500 pb-4">
                     <p>{note?.content}</p>
                     <div className="flex flex-col">
                       <p>{`${dayjs(note?.createdAt).fromNow()}`}</p>
