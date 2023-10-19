@@ -49,6 +49,23 @@ export const companyRouter = createTRPCRouter({
     })
   }), 
 
+  updateCompany: protectedProcedure
+  .input(z.object({companyId: z.string(), name: z.string(), state: z.string(), city: z.string(), phone: z.string()}))
+  .mutation( async ({ctx, input}) => {
+    return await ctx.db.company.update({
+      where: {
+        id: input.companyId
+      }, 
+      data: {
+        name: input.name,
+        state: input.state,
+        city: input.city,
+        phone: input.phone,
+      }
+    })
+  }), 
+
+
 
 
 

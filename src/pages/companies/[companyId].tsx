@@ -20,11 +20,23 @@ export default function CompanyPage() {
   const companyId = router.query.companyId as string;
 
   const { data: company } = api.company.getOneCompany.useQuery({ companyId });
+  const { mutate: updateCompany } = api.company.updateCompany.useMutation({
+    onSettled: async () => {
+      await ctx.company.getAllCompanies.invalidate();
+    },
+  });
   const { data: notes } = api.companyNote.getAllNotes.useQuery({ companyId });
   const { mutate: createNote } = api.companyNote.createNote.useMutation({
     onSettled: async () => {
       await ctx.companyNote.getAllNotes.invalidate();
       setOpenNoteModal(!openNoteModal);
+      updateCompany({
+        companyId: companyId,
+        name: company?.name as string,
+        state: company?.state as string,
+        city: company?.city as string,
+        phone: company?.phone as string,
+      });
     },
   });
   const { mutate: deleteMutation } = api.companyNote.deleteNote.useMutation({
