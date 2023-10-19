@@ -39,6 +39,13 @@ export default function ContactPage() {
     },
   });
 
+  const { mutate: deleteContactNoteMutation } =
+    api.contactNote.deleteContactNote.useMutation({
+      onSettled: async () => {
+        await ctx.contactNote.getAllContactNotes.invalidate();
+      },
+    });
+
   const { data: attempts } = api.attempt.getAllAttempts.useQuery({ contactId });
 
   const { mutate: deleteMutation } = api.attempt.deleteAttempt.useMutation({
@@ -111,7 +118,7 @@ export default function ContactPage() {
                       <p>{`${dayjs(note?.createdAt).fromNow()}`}</p>
                       <div className="flex flex-row justify-end">
                         <AiFillDelete
-                          onClick={() => deleteMutation(note?.id)}
+                          onClick={() => deleteContactNoteMutation(note?.id)}
                           className=" text-right text-2xl text-red-600 hover:cursor-pointer"
                         />
                       </div>

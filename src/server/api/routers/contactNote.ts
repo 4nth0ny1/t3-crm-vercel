@@ -43,13 +43,13 @@ export const contactNoteRouter = createTRPCRouter({
     })
   }), 
 
-//   deleteNote: protectedProcedure
-//   .input(z.string())
-//   .mutation(({ctx, input}) => {
-//     return ctx.db.companyNote.delete({
-//       where: {
-//         id: input
-//       }
-//     })
-//   }), 
+  deleteContactNote: protectedProcedure
+  .input(z.string())
+  .mutation(({ctx, input}) => {
+    return ctx.db.contactNote.delete({
+      where: {
+        id: input
+      }
+    })
+  }), 
 });
