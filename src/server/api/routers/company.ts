@@ -24,7 +24,10 @@ export const companyRouter = createTRPCRouter({
       where: {
         id: input.companyId
       }, 
-      
+      include: {
+        contacts: true,
+        opportunities: true
+      }
     })
   }), 
 

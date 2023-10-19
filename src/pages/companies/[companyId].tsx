@@ -33,6 +33,10 @@ export default function CompanyPage() {
     },
   });
 
+  // console.log(
+  //   "contactId: ",
+  //   company?.opportunities.map((opp) => opp.contactId),
+  // );
   return (
     <div>
       <Navbar />
@@ -48,8 +52,17 @@ export default function CompanyPage() {
                 {company?.city}, {company?.state}
               </p>
             </div>
-            <div className="mb-4 flex justify-between bg-base-200 p-4">
+            <div className="mb-4 flex flex-col justify-between bg-base-200 p-4">
               <h2 className="text-xl">Opportunities</h2>
+              {company?.opportunities.map((opp) => {
+                return (
+                  <div className="border-2 border-black">
+                    <h2>{opp.name}</h2>
+                    <p>{opp.description}</p>
+                    <p>placeholder contact link</p>
+                  </div>
+                );
+              })}
             </div>
             <div className="bg-base-200 p-4">
               <div className="mb-4 flex flex-row justify-between">

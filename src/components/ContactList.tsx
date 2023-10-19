@@ -9,6 +9,7 @@ export default function ContactList() {
   const companyId = router.query.companyId as string;
 
   const { data: contacts } = api.contact.getAllContacts.useQuery({ companyId });
+  console.log(contacts);
 
   return (
     <>
