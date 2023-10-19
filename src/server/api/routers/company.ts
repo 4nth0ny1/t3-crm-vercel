@@ -66,7 +66,13 @@ export const companyRouter = createTRPCRouter({
   }), 
 
 
-
-
-
-});
+  deleteCompany: protectedProcedure
+  .input(z.object({companyId: z.string()}))
+  .mutation(async ({ctx, input}) => {
+    return await ctx.db.company.delete({
+      where: {
+        id: input.companyId
+      }
+    })
+  })
+})

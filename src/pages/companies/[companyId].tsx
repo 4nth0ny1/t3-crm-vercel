@@ -45,6 +45,14 @@ export default function CompanyPage() {
     },
   });
 
+  const { mutate: deleteCompanyMutation } =
+    api.company.deleteCompany.useMutation({
+      onSettled: async () => {
+        await ctx.company.getAllCompanies.invalidate();
+        await router.push("/companies");
+      },
+    });
+
   return (
     <div>
       <Navbar />
@@ -59,6 +67,16 @@ export default function CompanyPage() {
               <p className="text-xl">
                 {company?.city}, {company?.state}
               </p>
+              <button
+                className="btn btn-secondary cursor-pointer text-2xl"
+                onClick={() =>
+                  deleteCompanyMutation({
+                    companyId: companyId,
+                  })
+                }
+              >
+                delete company
+              </button>
             </div>
             <div className="mb-4 flex flex-col justify-between bg-base-200 p-4">
               <h2 className="text-xl">Opportunities</h2>
