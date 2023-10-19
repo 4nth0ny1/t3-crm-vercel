@@ -14,7 +14,7 @@ export default function Companies() {
       <table className="table table-xs">
         <thead>
           <tr className="text-lg">
-            <th>Company Name</th>
+            <th className="py-4">Company Name</th>
             <th>Phone</th>
             <th>City</th>
             <th>State</th>
@@ -24,12 +24,12 @@ export default function Companies() {
         <tbody>
           {companies?.map((company) => {
             return (
-              <tr key={company.name}>
+              <tr key={company.name} className="border-b border-base-300">
                 <Link
                   href={`/companies/${company.id}`}
                   className="cursor-pointer text-base"
                 >
-                  <td>{company.name}</td>
+                  <td className="py-4">{company.name}</td>
                 </Link>
                 <td className="text-base">{company.phone}</td>
                 <td className="text-base">{company.city}</td>
