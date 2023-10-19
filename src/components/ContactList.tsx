@@ -46,12 +46,11 @@ const ContactItem = ({
   email,
   companyId,
 }: ContactProps) => {
-  console.log(companyId);
   return (
     <div className="flex flex-row justify-between border-b border-black">
       {/* <Link href={`${companyId}/contacts/${id}`}> */}
       <Link href={`/companies/contacts/${id}`}>
-        <h2>{name}</h2>
+        <h2 className="underline">{name}</h2>
       </Link>
       <p>{title}</p>
       <div className="flex flex-col gap-2">

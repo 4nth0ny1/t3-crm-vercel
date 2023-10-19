@@ -9,7 +9,7 @@ export default function Companies() {
     <div className="overflow-x-auto px-20">
       <table className="table table-xs">
         <thead>
-          <tr>
+          <tr className="text-lg">
             <th>Company Name</th>
             <th>Phone</th>
             <th>City</th>
@@ -21,13 +21,16 @@ export default function Companies() {
           {companies?.map((company) => {
             return (
               <tr key={company.name}>
-                <Link href={`/companies/${company.id}`} className="underline">
+                <Link
+                  href={`/companies/${company.id}`}
+                  className="cursor-pointer text-base"
+                >
                   <td>{company.name}</td>
                 </Link>
-                <td>{company.phone}</td>
-                <td>{company.city}</td>
-                <td>{company.state}</td>
-                <td>placeholder</td>
+                <td className="text-base">{company.phone}</td>
+                <td className="text-base">{company.city}</td>
+                <td className="text-base">{company.state}</td>
+                <td className="text-base">placeholder</td>
               </tr>
             );
           })}

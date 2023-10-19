@@ -33,10 +33,6 @@ export default function CompanyPage() {
     },
   });
 
-  // console.log(
-  //   "contactId: ",
-  //   company?.opportunities.map((opp) => opp.contactId),
-  // );
   return (
     <div>
       <Navbar />
