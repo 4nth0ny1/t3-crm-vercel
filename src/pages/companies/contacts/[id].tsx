@@ -54,6 +54,10 @@ export default function ContactPage() {
     },
   });
 
+  const { data: opportunities } = api.opportunity.getAllOpportunities.useQuery({
+    contactId,
+  });
+
   return (
     <>
       <Navbar />
@@ -99,6 +103,14 @@ export default function ContactPage() {
           <div className="flex w-1/3 flex-col gap-4">
             <div className="bg-base-200 p-4">
               <h2 className="text-xl">Opportunities</h2>
+              {opportunities?.map((opp) => {
+                return (
+                  <div>
+                    <h2>{opp?.name}</h2>
+                    <p>{opp?.description}</p>
+                  </div>
+                );
+              })}
             </div>
             <div className="bg-base-200 p-4">
               <div className="mb-4 flex flex-row justify-between">

@@ -64,6 +64,7 @@ model User {
     contacts      Contact[]
     attempts      Attempt[]
     contactNotes  ContactNote[]
+    opportunities Opportunity[]
 }
 
 model VerificationToken {
@@ -75,19 +76,20 @@ model VerificationToken {
 }
 
 model Company {
-    id           String        @id @default(cuid())
-    name         String?
-    phone        String?
-    city         String?
-    state        String?
-    createdAt    DateTime      @default(now())
-    updatedAt    DateTime      @updatedAt
-    user         User          @relation(fields: [userId], references: [id])
-    userId       String
-    companyNotes CompanyNote[]
-    contacts     Contact[]
-    attempts     Attempt[]
-    contactNotes ContactNote[]
+    id            String        @id @default(cuid())
+    name          String?
+    phone         String?
+    city          String?
+    state         String?
+    createdAt     DateTime      @default(now())
+    updatedAt     DateTime      @updatedAt
+    user          User          @relation(fields: [userId], references: [id])
+    userId        String
+    companyNotes  CompanyNote[]
+    contacts      Contact[]
+    attempts      Attempt[]
+    contactNotes  ContactNote[]
+    opportunities Opportunity[]
 }
 
 model CompanyNote {
@@ -102,19 +104,20 @@ model CompanyNote {
 }
 
 model Contact {
-    id           String        @id @default(cuid())
-    name         String
-    title        String
-    phone        String
-    email        String
-    createdAt    DateTime      @default(now())
-    updatedAt    DateTime      @updatedAt
-    company      Company       @relation(fields: [companyId], references: [id])
-    companyId    String
-    user         User?         @relation(fields: [userId], references: [id])
-    userId       String?
-    attempts     Attempt[]
-    contactNotes ContactNote[]
+    id            String        @id @default(cuid())
+    name          String
+    title         String
+    phone         String
+    email         String
+    createdAt     DateTime      @default(now())
+    updatedAt     DateTime      @updatedAt
+    company       Company       @relation(fields: [companyId], references: [id])
+    companyId     String
+    user          User?         @relation(fields: [userId], references: [id])
+    userId        String?
+    attempts      Attempt[]
+    contactNotes  ContactNote[]
+    opportunities Opportunity[]
 }
 
 model Attempt {
@@ -129,6 +132,20 @@ model Attempt {
     companyId String
     user      User?    @relation(fields: [userId], references: [id])
     userId    String?
+}
+
+model Opportunity {
+    id          String   @id @default(cuid())
+    name        String
+    description String
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+    contact     Contact  @relation(fields: [contactId], references: [id])
+    contactId   String
+    company     Company  @relation(fields: [companyId], references: [id])
+    companyId   String
+    user        User?    @relation(fields: [userId], references: [id])
+    userId      String?
 }
 
 model ContactNote {

@@ -35,3 +35,6 @@ export type ContactNote = allContactNotesOutput[number]
 export const getAllContactNotes = z.object({
     companyId: z.string().cuid()
   })
+
+  type allOpportunitiesOutput = RouterOutputs['opportunity']['getAllOpportunities']
+  export type Opportunity = allOpportunitiesOutput[number]
