@@ -47,7 +47,7 @@ const ContactItem = ({
 }: ContactProps) => {
   console.log(companyId);
   return (
-    <div className="flex flex-row justify-between">
+    <div className="flex flex-row justify-between border-b border-black">
       {/* <Link href={`${companyId}/contacts/${id}`}> */}
       <Link href={`/companies/contacts/${id}`}>
         <h2>{name}</h2>

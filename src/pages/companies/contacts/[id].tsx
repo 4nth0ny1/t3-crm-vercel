@@ -96,7 +96,7 @@ export default function ContactPage() {
             })} */}
           </div>
           <div className="bg-base-200 p-4">
-            <h2>Opportunities</h2>
+            <h2 className="text-xl">Opportunities</h2>
           </div>
         </div>
       </div>
