@@ -63,6 +63,7 @@ model User {
     companyNotes  CompanyNote[]
     contacts      Contact[]
     attempts      Attempt[]
+    contactNotes  ContactNote[]
 }
 
 model VerificationToken {
@@ -86,6 +87,7 @@ model Company {
     companyNotes CompanyNote[]
     contacts     Contact[]
     attempts     Attempt[]
+    contactNotes ContactNote[]
 }
 
 model CompanyNote {
@@ -100,23 +102,37 @@ model CompanyNote {
 }
 
 model Contact {
-    id        String    @id @default(cuid())
-    name      String
-    title     String
-    phone     String
-    email     String
-    createdAt DateTime  @default(now())
-    updatedAt DateTime  @updatedAt
-    company   Company   @relation(fields: [companyId], references: [id])
-    companyId String
-    user      User?     @relation(fields: [userId], references: [id])
-    userId    String?
-    attempts  Attempt[]
+    id           String        @id @default(cuid())
+    name         String
+    title        String
+    phone        String
+    email        String
+    createdAt    DateTime      @default(now())
+    updatedAt    DateTime      @updatedAt
+    company      Company       @relation(fields: [companyId], references: [id])
+    companyId    String
+    user         User?         @relation(fields: [userId], references: [id])
+    userId       String?
+    attempts     Attempt[]
+    contactNotes ContactNote[]
 }
 
 model Attempt {
     id        String   @id @default(cuid())
     type      String
+    content   String
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+    contact   Contact  @relation(fields: [contactId], references: [id])
+    contactId String
+    company   Company  @relation(fields: [companyId], references: [id])
+    companyId String
+    user      User?    @relation(fields: [userId], references: [id])
+    userId    String?
+}
+
+model ContactNote {
+    id        String   @id @default(cuid())
     content   String
     createdAt DateTime @default(now())
     updatedAt DateTime @updatedAt

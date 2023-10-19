@@ -24,6 +24,10 @@ export default function ContactPage() {
     contactId,
   });
 
+  const { data: contactNotes } = api.contactNote.getAllContactNotes.useQuery({
+    contactId,
+  });
+
   const { data: attempts } = api.attempt.getAllAttempts.useQuery({ contactId });
 
   const { mutate: deleteMutation } = api.attempt.deleteAttempt.useMutation({
@@ -78,7 +82,7 @@ export default function ContactPage() {
             <div className="mb-4 flex flex-row justify-between">
               <h2 className="text-xl">Notes</h2>
             </div>
-            {/* {notes?.map((note) => {
+            {contactNotes?.map((note) => {
               return (
                 <div className="mb-8 flex flex-row justify-between border-b border-gray-500 pb-4">
                   <p>{note?.content}</p>
@@ -93,7 +97,7 @@ export default function ContactPage() {
                   </div>
                 </div>
               );
-            })} */}
+            })}
           </div>
           <div className="bg-base-200 p-4">
             <h2 className="text-xl">Opportunities</h2>

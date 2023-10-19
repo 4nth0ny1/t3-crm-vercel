@@ -28,3 +28,10 @@ export type Attempt = allAttemptsOutput[number]
 export const getAllAttempts = z.object({
     contactId: z.string().cuid()
   })
+
+type allContactNotesOutput = RouterOutputs['contactNote']['getAllContactNotes']
+export type ContactNote = allContactNotesOutput[number]
+
+export const getAllContactNotes = z.object({
+    companyId: z.string().cuid()
+  })
