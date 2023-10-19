@@ -48,6 +48,9 @@ export default function CompanyPage() {
                 {company?.city}, {company?.state}
               </p>
             </div>
+            <div className="mb-4 flex justify-between bg-base-200 p-4">
+              <h2 className="text-xl">Opportunities</h2>
+            </div>
             <div className="bg-base-200 p-4">
               <div className="mb-4 flex flex-row justify-between">
                 <h2 className="text-xl">Notes</h2>
@@ -101,9 +104,6 @@ export default function CompanyPage() {
               )}
 
               <ContactList />
-            </div>
-            <div className="bg-base-200 p-4">
-              <h2>Opportunities</h2>
             </div>
           </div>
         </div>
