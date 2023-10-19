@@ -1,5 +1,9 @@
 import Link from "next/link";
 import { api } from "../utils/api";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 export default function Companies() {
   const { data: companies } = api.company.getAllCompanies.useQuery();
@@ -30,7 +34,9 @@ export default function Companies() {
                 <td className="text-base">{company.phone}</td>
                 <td className="text-base">{company.city}</td>
                 <td className="text-base">{company.state}</td>
-                <td className="text-base">placeholder</td>
+                <td className="text-base">{`${dayjs(
+                  company.updatedAt,
+                ).fromNow()}`}</td>
               </tr>
             );
           })}
