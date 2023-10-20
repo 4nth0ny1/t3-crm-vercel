@@ -7,6 +7,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import CreateAttemptForm from "~/components/CreateAttemptForm";
 import { AiFillDelete } from "react-icons/ai";
 import CreateOpportunityForm from "~/components/CreateOpportunityForm";
+import Link from "next/link";
 
 dayjs.extend(relativeTime);
 
@@ -28,6 +29,8 @@ export default function ContactPage() {
   });
 
   const companyId = contact?.companyId as string;
+
+  const { data: company } = api.company.getOneCompany.useQuery({ companyId });
 
   const { data: contactNotes } = api.contactNote.getAllContactNotes.useQuery({
     contactId,
@@ -78,6 +81,13 @@ export default function ContactPage() {
                 <p className="text-xl">{contact?.title}</p>
                 <p className="text-xl">{contact?.phone}</p>
                 <p className="text-xl">{contact?.email}</p>
+              </div>
+              <div>
+                <Link href={`/companies/${companyId}`}>
+                  <p className="cursor-pointer text-xl underline hover:text-primary">
+                    Back to {company?.name}
+                  </p>{" "}
+                </Link>
               </div>
             </div>
             <div className="mb-4 flex flex-col gap-4 bg-base-200 p-4">
