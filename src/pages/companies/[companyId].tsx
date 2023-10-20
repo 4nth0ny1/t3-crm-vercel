@@ -49,14 +49,7 @@ export default function CompanyPage() {
     },
   });
 
-  // const { mutate: deleteCompanyMutation } =
-  //   api.company.deleteCompany.useMutation({
-  //     onSettled: async () => {
-  //       await ctx.company.getAllCompanies.invalidate();
-  //       await router.push("/companies");
-  //     },
-  //   });
-
+  // delete company with confirm logic
   const mutation = api.company.deleteCompany.useMutation({
     onSettled: async () => {
       await ctx.company.getAllCompanies.invalidate();
@@ -69,7 +62,11 @@ export default function CompanyPage() {
   };
 
   const onDeleteCompany = ({ companyId }: CompanyProps) => {
-    if (confirm("delete?") === false) {
+    if (
+      confirm(
+        "Are you sure you want to delete this company and all its records?",
+      ) === false
+    ) {
       return;
     } else {
       mutation.mutate({ companyId });
