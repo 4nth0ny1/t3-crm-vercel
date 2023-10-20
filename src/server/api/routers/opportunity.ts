@@ -44,13 +44,13 @@ export const opportunityRouter = createTRPCRouter({
     })
   }), 
 
-//   deleteAttempt: protectedProcedure
-//   .input(z.string())
-//   .mutation(({ctx, input}) => {
-//     return ctx.db.attempt.delete({
-//       where: {
-//         id: input
-//       }
-//     })
-//   }), 
+  deleteOpportunity: protectedProcedure
+  .input(z.string())
+  .mutation(({ctx, input}) => {
+    return ctx.db.opportunity.delete({
+      where: {
+        id: input
+      }
+    })
+  }), 
 });

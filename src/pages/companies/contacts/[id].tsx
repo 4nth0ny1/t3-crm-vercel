@@ -59,6 +59,13 @@ export default function ContactPage() {
     contactId,
   });
 
+  const { mutate: deleteOpportunityMutation } =
+    api.opportunity.deleteOpportunity.useMutation({
+      onSettled: async () => {
+        await ctx.opportunity.getAllOpportunities.invalidate();
+      },
+    });
+
   return (
     <>
       <Navbar />
@@ -110,6 +117,10 @@ export default function ContactPage() {
                   <div>
                     <h2>{opp?.name}</h2>
                     <p>{opp?.description}</p>
+                    <AiFillDelete
+                      className="cursor-pointer text-2xl text-red-600"
+                      onClick={() => deleteOpportunityMutation(`${opp?.id}`)}
+                    />
                   </div>
                 );
               })}
