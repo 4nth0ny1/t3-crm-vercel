@@ -6,6 +6,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import CreateAttemptForm from "~/components/CreateAttemptForm";
 import { AiFillDelete } from "react-icons/ai";
+import CreateOpportunityForm from "~/components/CreateOpportunityForm";
 
 dayjs.extend(relativeTime);
 
@@ -103,6 +104,7 @@ export default function ContactPage() {
           <div className="flex w-1/3 flex-col gap-4">
             <div className="bg-base-200 p-4">
               <h2 className="text-xl">Opportunities</h2>
+              <CreateOpportunityForm companyId={companyId} />
               {opportunities?.map((opp) => {
                 return (
                   <div>

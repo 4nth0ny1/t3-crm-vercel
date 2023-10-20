@@ -18,31 +18,31 @@ export const opportunityRouter = createTRPCRouter({
     orderBy: [{ createdAt: "desc" }],})
   }),
 
-//   createAttempt: protectedProcedure
-//   .input(z.object({type: z.string(), content: z.string(), companyId: z.string(), contactId: z.string()}))
-//   .mutation(({ctx, input}) => {
-//     return ctx.db.attempt.create({
-//       data: {
-//         type: input.type,
-//         content: input.content,
-//         user: {
-//           connect: {
-//             id: ctx.session.user.id
-//           }
-//         },
-//         company: {
-//           connect: {
-//             id: input.companyId
-//           }
-//         },
-//         contact: {
-//           connect: {
-//             id: input.contactId
-//           }
-//         },
-//       }
-//     })
-//   }), 
+  createOpportunity: protectedProcedure
+  .input(z.object({name: z.string(), description: z.string(), companyId: z.string(), contactId: z.string()}))
+  .mutation(({ctx, input}) => {
+    return ctx.db.opportunity.create({
+      data: {
+        name: input.name,
+        description: input.description,
+        user: {
+          connect: {
+            id: ctx.session.user.id
+          }
+        },
+        company: {
+          connect: {
+            id: input.companyId
+          }
+        },
+        contact: {
+          connect: {
+            id: input.contactId
+          }
+        },
+      }
+    })
+  }), 
 
 //   deleteAttempt: protectedProcedure
 //   .input(z.string())
