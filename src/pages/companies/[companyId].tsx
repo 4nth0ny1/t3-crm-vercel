@@ -20,12 +20,15 @@ export default function CompanyPage() {
   const companyId = router.query.companyId as string;
 
   const { data: company } = api.company.getOneCompany.useQuery({ companyId });
+
   const { mutate: updateCompany } = api.company.updateCompany.useMutation({
     onSettled: async () => {
       await ctx.company.getAllCompanies.invalidate();
     },
   });
+
   const { data: notes } = api.companyNote.getAllNotes.useQuery({ companyId });
+
   const { mutate: createNote } = api.companyNote.createNote.useMutation({
     onSettled: async () => {
       await ctx.companyNote.getAllNotes.invalidate();
@@ -39,19 +42,39 @@ export default function CompanyPage() {
       });
     },
   });
+
   const { mutate: deleteMutation } = api.companyNote.deleteNote.useMutation({
     onSettled: async () => {
       await ctx.companyNote.getAllNotes.invalidate();
     },
   });
 
-  const { mutate: deleteCompanyMutation } =
-    api.company.deleteCompany.useMutation({
-      onSettled: async () => {
-        await ctx.company.getAllCompanies.invalidate();
-        await router.push("/companies");
-      },
-    });
+  // const { mutate: deleteCompanyMutation } =
+  //   api.company.deleteCompany.useMutation({
+  //     onSettled: async () => {
+  //       await ctx.company.getAllCompanies.invalidate();
+  //       await router.push("/companies");
+  //     },
+  //   });
+
+  const mutation = api.company.deleteCompany.useMutation({
+    onSettled: async () => {
+      await ctx.company.getAllCompanies.invalidate();
+      await router.push("/companies");
+    },
+  });
+
+  type CompanyProps = {
+    companyId: string;
+  };
+
+  const onDeleteCompany = ({ companyId }: CompanyProps) => {
+    if (confirm("delete?") === false) {
+      return;
+    } else {
+      mutation.mutate({ companyId });
+    }
+  };
 
   return (
     <div>
@@ -67,16 +90,14 @@ export default function CompanyPage() {
               <p className="text-xl">
                 {company?.city}, {company?.state}
               </p>
-              <button
-                className="btn btn-secondary cursor-pointer text-2xl"
+              <AiFillDelete
+                className="cursor-pointer text-2xl text-red-600"
                 onClick={() =>
-                  deleteCompanyMutation({
-                    companyId: companyId,
+                  onDeleteCompany({
+                    companyId: companyId as string,
                   })
                 }
-              >
-                delete company
-              </button>
+              />
             </div>
             <div className="mb-4 flex flex-col justify-between bg-base-200 p-4">
               <h2 className="text-xl">Opportunities</h2>
