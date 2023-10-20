@@ -114,9 +114,11 @@ export default function ContactPage() {
               <CreateOpportunityForm companyId={companyId} />
               {opportunities?.map((opp) => {
                 return (
-                  <div>
-                    <h2>{opp?.name}</h2>
-                    <p>{opp?.description}</p>
+                  <div className="flex flex-row justify-between py-4">
+                    <div className="flex flex-col">
+                      <h2>{opp?.name}</h2>
+                      <p>{opp?.description}</p>
+                    </div>
                     <AiFillDelete
                       className="cursor-pointer text-2xl text-red-600"
                       onClick={() => deleteOpportunityMutation(`${opp?.id}`)}

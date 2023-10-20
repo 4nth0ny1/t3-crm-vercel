@@ -98,15 +98,17 @@ export default function CompanyPage() {
             </div>
             <div className="mb-4 flex flex-col justify-between bg-base-200 p-4">
               <h2 className="text-xl">Opportunities</h2>
-              {company?.opportunities.map((opp) => {
-                return (
-                  <div className="border-2 border-black">
-                    <h2>{opp.name}</h2>
-                    <p>{opp.description}</p>
-                    <p>placeholder contact link</p>
-                  </div>
-                );
-              })}
+              <div className="flex flex-row flex-wrap justify-center gap-10">
+                {company?.opportunities.map((opp) => {
+                  return (
+                    <div className="rounded-xl border border-black p-4">
+                      <h2>{opp.name}</h2>
+                      <p>{opp.description}</p>
+                      <p>placeholder contact link</p>
+                    </div>
+                  );
+                })}
+              </div>
             </div>
             <div className="bg-base-200 p-4">
               <div className="mb-4 flex flex-row justify-between">
