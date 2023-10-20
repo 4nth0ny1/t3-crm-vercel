@@ -91,7 +91,7 @@ export default function CompanyPage() {
                 className="cursor-pointer text-2xl text-red-600"
                 onClick={() =>
                   onDeleteCompany({
-                    companyId: companyId as string,
+                    companyId: companyId,
                   })
                 }
               />
