@@ -3,9 +3,22 @@ import Head from "next/head";
 import { FcGoogle } from "react-icons/fc";
 import { FiGithub } from "react-icons/fi";
 import Navbar from "~/components/Navbar";
+import { api } from "~/utils/api";
+import { useEffect, useState } from "react";
 
 export default function Home() {
+  const [calls, setTotalCalls] = useState(0);
   const { data: sessionData } = useSession();
+
+  const { data: companies } = api.company.getAllCompanies.useQuery();
+
+  useEffect(() => {
+    let total = 0;
+    companies?.map((company) => {
+      total += company.attempts.length;
+    });
+    setTotalCalls(total);
+  }, [companies]);
 
   return (
     <>
@@ -43,6 +56,33 @@ export default function Home() {
         <main className="px-8">
           <Navbar />
           <h2>Dashboard</h2>
+          <div className="flex flex-col gap-2 bg-base-200 p-4">
+            <div className="flex flex-row items-center gap-8">
+              <h2>calls</h2>
+              <progress
+                className="progress progress-primary w-56"
+                value={calls}
+                max="60"
+              ></progress>
+              <p>{calls}</p>
+            </div>
+            <div className="flex flex-row items-center gap-8">
+              <h2>opportunities</h2>
+              <progress
+                className="progress progress-primary w-56"
+                value={34}
+                max="100"
+              ></progress>
+            </div>
+            <div className="flex flex-row items-center gap-8">
+              <h2>contacts</h2>
+              <progress
+                className="progress progress-primary w-56"
+                value={34}
+                max="100"
+              ></progress>
+            </div>
+          </div>
         </main>
       )}
     </>

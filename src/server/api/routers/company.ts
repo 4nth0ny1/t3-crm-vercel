@@ -12,6 +12,9 @@ export const companyRouter = createTRPCRouter({
       where: {
         userId: ctx.session.user.id,
       },
+      include: {
+        attempts: true
+      },
       orderBy: [{ name: "asc" }],
     });
     
@@ -26,7 +29,8 @@ export const companyRouter = createTRPCRouter({
       }, 
       include: {
         contacts: true,
-        opportunities: true
+        opportunities: true,
+        attempts: true,
       }
     })
   }), 
