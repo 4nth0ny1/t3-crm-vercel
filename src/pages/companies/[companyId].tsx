@@ -7,6 +7,7 @@ import relativeTime from "dayjs/plugin/relativeTime";
 import { AiFillDelete } from "react-icons/ai";
 import ContactList from "~/components/ContactList";
 import CreateContactForm from "~/components/CreateContactForm";
+import Link from "next/link";
 
 dayjs.extend(relativeTime);
 
@@ -73,6 +74,8 @@ export default function CompanyPage() {
     }
   };
 
+  const { data: contacts } = api.contact.getAllContacts.useQuery({ companyId });
+
   return (
     <div>
       <Navbar />
@@ -104,7 +107,21 @@ export default function CompanyPage() {
                     <div className="rounded-xl border border-black p-4">
                       <h2>{opp.name}</h2>
                       <p>{opp.description}</p>
-                      <p>placeholder contact link</p>
+                      {contacts?.map((contact) => {
+                        return (
+                          <div>
+                            {contact.id === opp.contactId && (
+                              <Link
+                                href={`/companies/contacts/${opp.contactId}`}
+                              >
+                                <p className="cursor-pointer underline">
+                                  {contact.name}
+                                </p>
+                              </Link>
+                            )}
+                          </div>
+                        );
+                      })}
                     </div>
                   );
                 })}
